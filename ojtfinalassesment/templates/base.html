@@ -1,0 +1,44 @@
+{% load static %}
+{% load bootstrap5 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BITBlog{% block 'title' %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
+    {% block 'styles' %}{% endblock %}
+
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    {% block 'scripts' %}{% endblock %}
+</head>
+<body>
+    <main class="wrapper d-flex flex-column">
+        <header class="header py-3 px-3 px-lg-5 d-flex flex-row justify-content-between align-items-center gap-3">
+            <a class="d-block text-decoration-none" href="/"><h3>BITBlog</h3></a>
+
+            {% if user.is_authenticated %}
+            <nav class="d-flex flex-row gap-3">
+                <a href="{% url 'article_add' %}" class="text-decoration-none">NEW ARTICLE</a>
+                <a href="{% url 'signout' %}" class="text-decoration-none">LOGOUT</a>
+                <span>|</span>
+                <span>{{ user.username|upper }}</span>
+            </nav>
+            {% else %}
+            <a href="{% url 'signin' %}">Login</a>
+            {% endif %}
+        </header>
+    
+        <div class="content flex-fill d-flex flex-column">
+            {% block 'main' %}{% endblock %}
+        </div>
+    
+        <footer class="footer py-2 px-5 d-flex flex-row justify-content-end">
+            <small>ariksubagia &copy; 2021</small>
+        </footer>
+    </main>
+</body>
+</html>

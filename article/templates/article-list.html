@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block 'main' %}
+<div class="container py-5 d-flex flex-column gap-3">
+    {% if articles.count <= 0 %}
+    <div class="p-5 text-center">No article found</div>
+    {% else %}
+    {% for article in articles %}
+        {% include 'article-card.html' with article=article %}
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

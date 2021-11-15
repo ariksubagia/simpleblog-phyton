@@ -1,0 +1,15 @@
+body, html{
+    height:100%;
+}
+
+body{
+    background:#eee;
+}
+
+.wrapper{
+    min-height:100%;
+}
+
+.article-title{
+    text-decoration: none;
+}

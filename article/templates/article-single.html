@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block 'title' %} | {{ article.title }}{% endblock %}
+
+{% block 'main' %}
+<div class="container-lg">
+    <article class="article-single my-5 card">
+        <div class="article-single-top px-3 pt-3 d-flex flex-row">
+            <div class="flex-fill">
+                <div class="text-dark">
+                    <h3>{{ article.title }}</h3>
+                </div>
+        
+                <div class="article-single-meta d-flex flex-row gap-5 text-secondary">
+                    <small>{{ article.created_at|date:'d F Y h:i' }}</small>
+                    <small>by {{ article.poster.username }}</small>
+                </div>
+            </div>
+            <div class="flex-shrink-0"><a href="{% url 'article_edit' article.slug %}">EDIT</a></div>
+        </div>
+
+        {% if article.cover %}
+        <div class="article-single-cover d-flex flex-row justify-content-center align-items-center my-5">
+            <img src="{{ article.cover.url }}" class="mw-100" />
+        </div>
+        {% endif %}
+
+        <div class="article-single-content p-3">
+            {{ article.content|safe }}
+        </div>
+    </article>
+</div>
+{% endblock %}
